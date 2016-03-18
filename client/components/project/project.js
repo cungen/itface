@@ -1,6 +1,7 @@
 import * as $ from 'jquery';
 import React, { Component } from 'react';
 import Colors from 'material-ui/lib/styles/colors';
+import Paper from 'material-ui/lib/paper';
 import SelectField from 'material-ui/lib/select-field';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import TextField from 'material-ui/lib/text-field';
@@ -31,8 +32,13 @@ export default class Project extends Component {
     render() {
         const styles = {
             root: {
-                width: 600,
-                margin: '16px auto'
+                position: 'relative',
+                width: 768,
+                maxWidth: '90%',
+                padding: '0 24px 24px',
+                margin: '32px auto',
+                minHeight: 600,
+                overflow: 'hidden'
             },
             method: {
                 position: 'relative',
@@ -61,7 +67,8 @@ export default class Project extends Component {
         };
 
         return (
-            <div style={styles.root}>
+            <Paper style={styles.root}>
+                <h4>项目详情</h4>
                 {
                     this.state.list.map((item, index) => {
                         return (
@@ -87,7 +94,7 @@ export default class Project extends Component {
                         )
                     })
                 }
-            </div>
+            </Paper>
         );
     }
 

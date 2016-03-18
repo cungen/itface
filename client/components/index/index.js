@@ -1,5 +1,7 @@
-import * as $ from 'jquery';
+import _ from 'lodash';
 import React, { Component } from 'react';
+import { Link } from 'react-router';
+import Colors from 'material-ui/lib/styles/colors';
 import Paper from 'material-ui/lib/paper';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
@@ -15,30 +17,11 @@ export default class Index extends Component {
         };
     }
 
-    componentDidMount() {
-        let list = ProjectStore.getAll();
-        list.then((resp) => {
-            this.setState({
-                list: [{
-                    id: '1',
-                    name: 'aaaaaaa',
-                    createTime: '2016-01-02'
-                }, {
-                    id: '2',
-                    name: 'nbbbbbbbbb',
-                    createTime: '2016-01-02'
-                }]
-            });
-        }, (err) => {
-            this.setState({
-                list: [{
-                    id: '1',
-                    name: 'aaaaaaa',
-                    createTime: '2016-01-02'
-                }]
-            });
+    async componentDidMount() {
+        var list = await ProjectStore.getAll();
+        this.setState({
+            list: list
         });
-
     }
 
     render() {
@@ -46,29 +29,34 @@ export default class Index extends Component {
             root: {
                 width: 768,
                 maxWidth: '90%',
+                padding: '0 24px',
                 margin: '32px auto',
-                minHeight: 600
+                minHeight: 600,
+                overflow: 'hidden'
             },
-            listItem: {
-                margin: 16
+            item: {
+                borderLeft: `1px solid ${Colors.grey200}`,
+                borderRight: `1px solid ${Colors.grey200}`,
+                borderBottom: '1px solid ' + Colors.grey200
             }
         };
 
         return (
             <Paper style={styles.root} zDepth={1}>
-                <List subheader="项目列表">
-                    <Divider />
+                <h4>项目列表</h4>
+                <List>
+                    <Divider style={{backgroundColor: Colors.grey200}} />
                     {
-                        this.state.list.map((i, index) => {
+                        _.map(this.state.list, (i, index) => {
                             return (
-                                <div>
+                                <Link to={`/project/${i._id}`} style={{textDecoration: 'none'}}>
                                     <ListItem
+                                        style={styles.item}
                                         key={index}
                                         primaryText={i.name}
                                         secondaryText={i.createTime}
-                                        />
-                                    <Divider />
-                                </div>
+                                    />
+                                </Link>
                             );
                         })
                     }
@@ -77,4 +65,5 @@ export default class Index extends Component {
             </Paper>
         );
     };
+
 };

@@ -2,11 +2,12 @@
  * ProjectStore
  */
 
-import * as $ from 'jquery';
 import { EventEmitter } from 'events';
 
+import * as $ from 'jquery';
 import { register } from '../dispatcher/AppDispatcher';
 import ActionTypes from '../constants/ActionTypes';
+import API from '../utils/api';
 
 const CHANGE_EVENT = 'change';
 
@@ -20,7 +21,7 @@ class ProjectStoreClass extends EventEmitter {
     }
 
     async getAll() {
-        return await $.ajax('/api/b/project');
+        return await API.get('/api/b/project');
     }
 }
 
@@ -30,6 +31,9 @@ register((payload) => {
     const action = payload.action;
 
     switch(action.actionType) {
+        case ActionTypes.P_CREATE:
+            console.log(action);
+            break;
     }
 });
 

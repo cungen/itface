@@ -1,7 +1,13 @@
-import ProjectConstants from '../constants/ActionTypes';
+import ActionTypes from '../constants/ActionTypes';
+import dispatch from '../dispatcher/AppDispatcher';
 
-export default class ProjectAction {
-    create(text) {
-
+class ProjectActionClass {
+    create(name, url) {
+        dispatch(ActionTypes.P_CREATE, {
+            name: 'name',
+            url: url
+        });
     }
-};
+}
+
+export default ProjectAction = new ProjectActionClass();

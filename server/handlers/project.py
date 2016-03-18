@@ -26,10 +26,10 @@ class ProjectHandler(BaseHandler):
         """
         if len(args):
             projectId = args[0]
-            self.collection = DB.getCollection('project')
+            collection = DB.getCollection('project')
             self.set_header('Content-Type', 'application/json; charset=UTF-8')
-            self.finish(JSONEncoder().encode([dict(x) for x in self.collection.find()]))
+            self.finish(JSONEncoder().encode([dict(x) for x in collection.find()]))
         else:
+            collection = DB.getCollection('project')
             self.set_header('Content-Type', 'application/json; charset=UTF-8')
-            self.finish("hello world")
-
+            self.finish(JSONEncoder().encode([dict(x) for x in collection.find()]))

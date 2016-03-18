@@ -3,13 +3,6 @@ import { Link, hashHistory } from 'react-router';
 import AppBar from 'material-ui/lib/app-bar';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import IconButton from 'material-ui/lib/icon-button';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import Popover from 'material-ui/lib/popover/popover';
-import RaisedButton from 'material-ui/lib/raised-button';
-import FlatButton from 'material-ui/lib/flat-button';
-import TouchRipple from 'material-ui/lib/ripples/touch-ripple';
-import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
-import SocialPerson from 'material-ui/lib/svg-icons/social/person';
 import ActionHome from 'material-ui/lib/svg-icons/action/home';
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import Colors from 'material-ui/lib/styles/colors';
@@ -69,14 +62,6 @@ export default class App extends Component {
                                     <ContentAdd color={Colors.white} />
                                 </IconButton>
                             </Link>
-
-                            <IconMenu iconButtonElement={
-                                <IconButton><SocialPerson color={Colors.white} /></IconButton>
-                            }>
-                                <MenuItem primaryText="Refresh" />
-                                <MenuItem primaryText="Help" />
-                                <MenuItem primaryText="Sign out" />
-                            </IconMenu>
                         </div>
                     }/>
                 <div style={styles.content}>
