@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 
 import ProjectAction from '../../actions/ProjectAction';
 
-export default class Index extends Component {
+export default class Add extends Component {
     constructor() {
         super();
     }

@@ -1,30 +1,32 @@
 import _ from 'lodash';
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Colors from 'material-ui/lib/styles/colors';
 import Paper from 'material-ui/lib/paper';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
+import { fetchProjects } from '../../actions/ProjectAction';
 
-import ProjectStore from '../../stores/ProjectStore';
-
-export default class Index extends Component {
-    constructor() {
-        super();
+class Index extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
             list: []
         };
     }
 
-    async componentDidMount() {
-        var list = await ProjectStore.getAll();
-        this.setState({
-            list: list
-        });
+    componentDidMount() {
+        const { dispatch } = this.props;
+        dispatch(fetchProjects());
     }
 
     render() {
+        const {
+            projects
+        } = this.props;
+
         const styles = {
             root: {
                 width: 768,
@@ -35,8 +37,6 @@ export default class Index extends Component {
                 overflow: 'hidden'
             },
             item: {
-                borderLeft: `1px solid ${Colors.grey200}`,
-                borderRight: `1px solid ${Colors.grey200}`,
                 borderBottom: '1px solid ' + Colors.grey200
             }
         };
@@ -47,9 +47,12 @@ export default class Index extends Component {
                 <List>
                     <Divider style={{backgroundColor: Colors.grey200}} />
                     {
-                        _.map(this.state.list, (i, index) => {
+                        _.map(projects, (i, index) => {
                             return (
-                                <Link to={`/project/${i._id}`} style={{textDecoration: 'none'}}>
+                                <Link
+                                    key={index}
+                                    to={`/project/${i._id}`}
+                                    style={{textDecoration: 'none'}}>
                                     <ListItem
                                         style={styles.item}
                                         key={index}
@@ -65,5 +68,18 @@ export default class Index extends Component {
             </Paper>
         );
     };
+}
 
+Index.propTypes = {
+    projects: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired
 };
+
+function mapStateToProps(state) {
+    const { projects } = state;
+    return {
+        projects
+    }
+}
+
+export default connect(mapStateToProps)(Index);

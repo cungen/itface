@@ -8,8 +8,8 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import Colors from 'material-ui/lib/styles/colors';
 
 export default class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             activePopover: 'none',
             anchorEl: this.refs.menuButton
@@ -49,7 +49,7 @@ export default class App extends Component {
                 <AppBar
                     title="Itface"
                     iconElementLeft={
-                        <Link to={'/index'}>
+                        <Link to={'/'}>
                             <IconButton>
                                 <ActionHome color={Colors.white} />
                             </IconButton>

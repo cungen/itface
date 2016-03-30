@@ -1,13 +1,28 @@
 import ActionTypes from '../constants/ActionTypes';
-import dispatch from '../dispatcher/AppDispatcher';
+import * as $ from 'jquery';
 
-class ProjectActionClass {
-    create(name, url) {
-        dispatch(ActionTypes.P_CREATE, {
-            name: 'name',
-            url: url
-        });
+function requestProjects() {
+    return {
+        type: ActionTypes.P_REQUEST
     }
 }
 
-export default ProjectAction = new ProjectActionClass();
+/**
+ * action after receive projects
+ * @param  {Object[]} projects - object list
+ * @return {Object}            - action object
+ */
+function receiveProjects(projects) {
+    return {
+        type: ActionTypes.P_RECEIVE,
+        projects: projects
+    }
+
+}
+
+export function fetchProjects() {
+    return dispatch => {
+        dispatch(requestProjects());
+        return $.get('../api/b/project').then(resp => dispatch(receiveProjects(resp)) )
+    }
+}

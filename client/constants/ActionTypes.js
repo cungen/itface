@@ -1,7 +1,6 @@
 import keyMirror from 'keyMirror';
 
 export default keyMirror({
-    P_CREATE: null,
-    P_DESTROY: null,
-    P_DESTROY_COMPLETED: null
+    P_REQUEST: null,
+    P_RECEIVE: null
 });

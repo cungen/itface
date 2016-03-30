@@ -18,7 +18,7 @@ function makeWebpackConfig(options) {
     }
 
     config.entry = {
-        app: ['babel-polyfill', './client/index']
+        app: './client/index'
     };
 
     config.output = {
